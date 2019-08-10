@@ -3,7 +3,7 @@ import os
 import shutil
 
 
-def setup_kaggle():
+def setup_kaggle(KAGGLE=False):
     if KAGGLE:
         x = [f for f in os.listdir(os.curdir) if re.search('kaggle.*\.json', f)]
         assert len(x) == 1, 'Too much kaggle.json files'
@@ -14,12 +14,12 @@ def setup_kaggle():
         os.chmod('~/.kaggle/kaggle.json', 0o600)
 
 
-def download_kaggle_data():
+def download_kaggle_data(DOWNLOAD_DATA=False, COMPETITION=None, DATA_DIR=None):
     if DOWNLOAD_DATA:
         os.system('{} -p {}'.format(COMPETITION, str(DATA_DIR)))
 
 
-def unarchive_data(USE_SUBFOLDERS=False):
+def unarchive_data(UNARCHIVE_DATA=False, FILES_TO_UNZIP=None, DATA_DIR=None, USE_SUBFOLDERS=False):
     if UNARCHIVE_DATA and FILES_TO_UNZIP:
         for filename in FILES_TO_UNZIP:
             if USE_SUBFOLDERS:
@@ -31,9 +31,4 @@ def unarchive_data(USE_SUBFOLDERS=False):
 
 
 if __name__ == '__main__':
-    KAGGLE = False
-    COMPETITION = None
-    DOWNLOAD_DATA = False
-    DATA_DIR = None
-    UNARCHIVE_DATA = False
-    FILES_TO_UNZIP = []
+    download_kaggle_data()
