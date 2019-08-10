@@ -8,10 +8,10 @@ def setup_kaggle(KAGGLE=False):
         x = [f for f in os.listdir(os.curdir) if re.search('kaggle.*\.json', f)]
         assert len(x) == 1, 'Too much kaggle.json files'
         assert re.match('kaggle.*\.json', x[0]), 'Upload kaggle.json file'
-        if not os.path.exists('~/.kaggle'):
-            os.makedirs('~/.kaggle')
-        shutil.move(x[0], '~/.kaggle/kaggle.json')
-        os.chmod('~/.kaggle/kaggle.json', 0o600)
+        if not os.path.exists('/root/.kaggle'):
+            os.makedirs('/root/.kaggle')
+        shutil.move(x[0], '/root/.kaggle/kaggle.json')
+        os.chmod('/root/.kaggle/kaggle.json', 0o600)
 
 
 def download_kaggle_data(DOWNLOAD_DATA=False, COMPETITION=None, DATA_DIR=None):
