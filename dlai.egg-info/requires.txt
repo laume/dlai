@@ -1,5 +1,0 @@
-numpy
-Pillow
-matplotlib
-tensorflow-gpu==2.0.0-beta1
-seaborn
