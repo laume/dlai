@@ -6,7 +6,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="dlai",
-    version="0.0.1",
+    version="0.0.2",
     author="Laura Lu",
     author_email="new4spam@gmail.com",
     description="DL & ML helper library",
@@ -26,6 +26,5 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-        "Tensorflow Version :: 2.0",
     ],
 )
