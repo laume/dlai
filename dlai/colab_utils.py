@@ -5,17 +5,18 @@ import shutil
 
 def setup_kaggle():
     if KAGGLE:
-        x = !ls kaggle*.json
+        x = [f for f in os.listdir(os.curdir) if re.search('kaggle.*\.json', f)]
+        assert len(x) == 1, 'Too much kaggle.json files'
         assert re.match('kaggle.*\.json', x[0]), 'Upload kaggle.json file'
         if not os.path.exists('~/.kaggle'):
             os.makedirs('~/.kaggle')
-        !mv kaggle*.json ~/.kaggle/kaggle.json
-        !chmod 600 ~/.kaggle/kaggle.json
+        shutil.move(x[0], '~/.kaggle/kaggle.json')
+        os.chmod('~/.kaggle/kaggle.json', 0o600)
 
 
 def download_kaggle_data():
     if DOWNLOAD_DATA:
-        !{COMPETITION} -p {str(DATA_DIR)}
+        os.system('{} -p {}'.format(COMPETITION, str(DATA_DIR)))
 
 
 def unarchive_data(USE_SUBFOLDERS=False):

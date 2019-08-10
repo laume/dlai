@@ -6,7 +6,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="dlai",
-    version="0.0.2",
+    version="0.0.3",
     author="Laura Lu",
     author_email="new4spam@gmail.com",
     description="DL & ML helper library",
