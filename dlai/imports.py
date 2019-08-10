@@ -48,3 +48,7 @@ from sklearn.preprocessing import (
 import tensorflow as tf
 from tensorflow import keras
 
+# My imports
+from dlai.colab_utils import setup_kaggle
+from dlai.colab_utils import download_kaggle_data
+from dlai.colab_utils import unarchive_data
