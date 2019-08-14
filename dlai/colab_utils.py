@@ -30,7 +30,7 @@ def download_kaggle_data(COMPETITION: Optional[str]=None, DATA_DIR: Optional[str
         if not DATA_DIR:
             os.system(COMPETITION)
         else:
-            os.system('{} -p {}'.format(COMPETITION, str(DATA_DIR)))
+            os.system('{} --unzip -p {}'.format(COMPETITION, str(DATA_DIR)))
 
 
 def unarchive_data(
@@ -46,8 +46,10 @@ def unarchive_data(
     :return: None
     """
     for filename in FILES_TO_UNZIP:
+        # TODO path or string and destination folder
         if USE_SUBFOLDERS:
-            dir_name = filename.split('.zip')[0]
+            # TODO add tar and etc
+            dir_name = filename.split('.')[0]
         else:
             dir_name = ''
         shutil.unpack_archive(str(DATA_DIR/filename), extract_dir=str(DATA_DIR/dir_name))

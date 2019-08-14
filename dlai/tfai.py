@@ -1,4 +1,4 @@
 import tensorflow as tf
+import pandas as pd
 
-# TODO Create helper functions for TF
-
+# TODO add TF helper functions
