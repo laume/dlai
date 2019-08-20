@@ -54,3 +54,5 @@ from tensorflow import keras
 from dlai.colab_utils import setup_kaggle
 from dlai.colab_utils import download_kaggle_data
 from dlai.colab_utils import unarchive_data
+from dlai.utils import check_df_image_size
+from dlai.utils import plot_df_images
