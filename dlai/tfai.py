@@ -2,6 +2,7 @@ import tensorflow as tf
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from tensorflow import keras
 
 
 def deprocess_image(x):
@@ -61,6 +62,17 @@ def visualize_filters(model, layer_name, size=64, margin=5):
     plt.figure(figsize=(20, 20))
     plt.imshow(results)
 
+
+def save_model_json(model_arch_path, model):
+    with open(model_arch_path, "w") as f:
+        f.write(model.to_json())
+
+
+def load_model_json(model_arch_path, model_weights_path):
+    with open(model_arch_path, "r") as f:
+        model = keras.models.model_from_json(f.read())
+    model.load_weights(model_weights_path)
+    return model
 
 
 if __name__ == '__main__':

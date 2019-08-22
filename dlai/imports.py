@@ -61,5 +61,7 @@ from dlai.utils import plot_df_images
 from dlai.tfai import deprocess_image
 from dlai.tfai import visualize_one_filter
 from dlai.tfai import visualize_filters
+from dlai.tfai import save_model_json
+from dlai.tfai import load_model_json
 
 from dlai.mlai import plot_history
