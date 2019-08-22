@@ -59,5 +59,7 @@ from dlai.utils import check_df_image_size
 from dlai.utils import plot_df_images
 
 from dlai.tfai import deprocess_image
-from dlai.tfai import visualise_one_filter
-from dlai.tfai import visualise_filters
+from dlai.tfai import visualize_one_filter
+from dlai.tfai import visualize_filters
+
+from dlai.mlai import plot_history
