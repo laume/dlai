@@ -3,6 +3,7 @@ from tensorflow import keras
 import pandas as pd
 
 
+
 def plot_history(history, contains, skip=0):
     df = pd.DataFrame(history.history)
     df[list(df.filter(regex=contains))].iloc[skip:].plot()

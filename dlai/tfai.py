@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow import keras
+from typing import Optional
+from .utils import plot_df_images
 
 
 def deprocess_image(x):
@@ -18,7 +20,7 @@ def deprocess_image(x):
     return x
 
 
-def visualize_one_filter(model, layer_name, filter_index, size=150):
+def visualize_one_filter(model, layer_name: str, filter_index: int, size=150):
     """
     Builds a loss function that maximizes the activation of the nth filter of the specified layer.
     To plot filter image use plt.imshow(visualise_one_filter(model, layer_name, filter_index, size=150))
@@ -74,6 +76,62 @@ def load_model_json(model_arch_path, model_weights_path):
     model.load_weights(model_weights_path)
     return model
 
+
+def get_most_confused(
+        df: pd.DataFrame,
+        path_column: str,
+        predictions: np.array,
+        labels: np.array,
+        image_count: int,
+        difference_rate: Optional[float]=None,
+        plot: Optional[bool]=True,
+        random_plot: Optional[bool]=True,
+    ) -> pd.DataFrame:
+    """
+    Plots given number of images from DataFrame, which predicted values differs from real values
+    by specified difference_rate.
+    :param df: DataFrame you use for predictions.
+    :param path_column: Column where image paths are specified
+    :param predictions: Predictions tensor.
+    :param labels: Label tensor.
+    :param image_count: number of images you want to plot
+    :param difference_rate: percentage of difference between predicted and real values (0-1)
+    :param plot: If True images are plotted, otherwise returns pd.DataFrame. Default True
+    :param random_plot: If True selects images randomly. Default True
+    :return: pd.DataFrame
+    """
+    max_predictions = predictions.argmax(axis=1)
+    data = {
+        'pred_label / label / df_label': [],
+        'image': []
+    }
+    for i, (a, b, c) in enumerate(zip(max_predictions, labels, df['AdoptionSpeed'].tolist())):
+        if not difference_rate:
+            if a != b:
+                data['pred_label / label / df_label'].append(f'{a} / {b} / {c}')
+                data['image'].append(df.iloc[i].image)
+        else:
+            y_hat = int(a)
+            y = int(b)
+            if predictions[i][y_hat] - predictions[i][y] >= difference_rate:
+                predicted = str(round(predictions[i][y_hat], 4))
+                real_class = str(round(predictions[i][y], 4))
+                data['pred_label / label / df_label'].append(f'{y_hat}: {predicted} / {y}: {real_class} / {c}')
+                data['image'].append(df.iloc[i].image)
+
+    confused_df = pd.DataFrame(data)
+
+    if not plot:
+        return confused_df
+
+    print(
+        f'From {len(df)} images of tested dataframe {len(confused_df)} images were predicted incorrectly with the difference_rate = {difference_rate}.\n')
+    plot_df_images(confused_df, 'image', image_count, 'pred_label / label / df_label', random_plot=random_plot)
+
+
+
+# TODO create class with predictions: do evaluate, predict, test_labels, plot_most_confused??
+# TODO check fast.ai API to cleanup dataset
 
 if __name__ == '__main__':
     layer_name = 'block1_conv1'

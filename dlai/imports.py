@@ -50,7 +50,7 @@ from sklearn.preprocessing import (
 import tensorflow as tf
 from tensorflow import keras
 
-# My imports
+# My methods:
 from dlai.colab_utils import setup_kaggle
 from dlai.colab_utils import download_kaggle_data
 from dlai.colab_utils import unarchive_data
@@ -63,5 +63,6 @@ from dlai.tfai import visualize_one_filter
 from dlai.tfai import visualize_filters
 from dlai.tfai import save_model_json
 from dlai.tfai import load_model_json
+from dlai.tfai import get_most_confused
 
 from dlai.mlai import plot_history
