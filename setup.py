@@ -6,7 +6,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="dlai",
-    version="0.0.15",
+    version="0.0.16",
     author="Laura Lu",
     author_email="new4spam@gmail.com",
     description="DL & ML helper library",
@@ -19,7 +19,7 @@ setuptools.setup(
         "numpy",
         "Pillow",
         "matplotlib",
-        "tensorflow-gpu==2.0.0-beta1",
+        "tensorflow-gpu==2.0",
         "seaborn"
     ],
     classifiers=[
