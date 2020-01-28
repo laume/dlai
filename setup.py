@@ -19,7 +19,7 @@ setuptools.setup(
         "numpy",
         "Pillow",
         "matplotlib",
-        "tensorflow-gpu==2.0",
+        "tensorflow-gpu==2.0.1",
         "seaborn"
     ],
     classifiers=[
